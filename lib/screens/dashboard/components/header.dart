@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:untitled/constants.dart';
 import 'package:untitled/responsive.dart';
 import 'package:untitled/controllers/menuAppController.dart';
+import 'package:untitled/screens/dashboard/components/profile.dart';
 //import 'package:flutter/src/material/menu_anchor.dart';
 
 
@@ -50,21 +51,22 @@ class ProfileCard extends StatelessWidget{
           border: Border.all(color: Colors.white10)),
       child: Row(
         children: [
-          //Image.asset(
-            //"assets/images/iStock-trash.jpg",
-            // "",
-
-            //height: 50,
-            //width: 50,
-          //),
-          SizedBox(width: 10),
 
           if ( !Responsive.isMobile(context))
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: defaultPadding/2),
-            child: Text("mohamed "),
+
           ),
-          Icon(Icons.keyboard_arrow_down),
+          IconButton(icon : Icon(Icons.person),
+            onPressed:  () {
+    Navigator.push(
+    context,
+    MaterialPageRoute(
+    builder: (context) =>
+    profile()));
+    },
+          ),
+
         ],
       ),
     );
