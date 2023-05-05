@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, camel_case_types, no_leading_underscores_for_local_identifiers, file_names
+// ignore_for_file: prefer_const_constructors, no_leading_underscores_for_local_identifiers
 
 import 'package:flutter/material.dart';
 //import 'package:flutter_svg/flutter_svg.dart';
@@ -10,84 +10,83 @@ import 'package:untitled/screens/dashboard/components/waste_info_card.dart';
 
 class Mywaste extends StatelessWidget {
   const Mywaste({
-    Key ? key,
+    Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final Size _size = MediaQuery.of(context).size;
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(" My Waste", style: Theme
-                .of(context)
-                .textTheme
-                .titleMedium,),
-            ElevatedButton.icon(
-              style: TextButton.styleFrom(
-                padding: EdgeInsets.symmetric(
-                  horizontal: defaultPadding * 1.5,
-                  vertical: defaultPadding/ ( Responsive.isMobile(context) ? 2:1),),
-              ),
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            addnew()));
-              },
-              icon: Icon(Icons.add),
-              label: Text("add new"),
+
+            Text(
+              " My Waste",
+
+              style: TextStyle(color: Colors.white , fontWeight: FontWeight.w300, fontSize: 20  ),
+
             ),
+
+
+        SizedBox(
+          height: defaultPadding,
+        ),
+        Column(
+          children: [
+            InkWell(
+              onTap: () { Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => AddNewScreen(info: demoMywaste[0]),
+                ),
+              );
+
+
+              },
+              child: wasteInfoCard(info: demoMywaste[0]),
+            ),
+            SizedBox(height: defaultPadding),
+            InkWell(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => AddNewScreen(info: demoMywaste[1]),
+                  ),
+                );
+              },
+              child: wasteInfoCard(info: demoMywaste[1]),
+            ),
+            SizedBox(height: defaultPadding),
+            InkWell(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => AddNewScreen(info: demoMywaste[2]),
+                  ),
+                );
+                // Code à exécuter lorsque l'utilisateur appuie sur la carte
+              },
+              child: wasteInfoCard(info: demoMywaste[2]),
+            ),
+            SizedBox(height: defaultPadding),
+            InkWell(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => AddNewScreen(info: demoMywaste[3]),
+                  ),
+                );
+                // Code à exécuter lorsque l'utilisateur appuie sur la carte
+              },
+              child: wasteInfoCard(info: demoMywaste[3]),
+            ),
+
           ],
         ),
-        SizedBox(height: defaultPadding,),
-        Responsive(
-          mobile:wasteInfoCardGridView(
-            crossAxisCount: _size.width < 650 ?2 : 4,
-            childAspectRatio: _size.width< 650 ? 1.3 : 1 ,) ,
-          tablet: wasteInfoCardGridView(),
-          desktop: wasteInfoCardGridView(childAspectRatio: _size.width < 1400 ? 1.1 : 1.4,),
-        ),
-
-
       ],
-
     );
   }
 }
- class wasteInfoCardGridView extends StatelessWidget {
-  const wasteInfoCardGridView({
-    Key? key,
-    this.crossAxisCount = 4, this.childAspectRatio=1,
- }) : super (key: key);
-  final int crossAxisCount ;
-  final double childAspectRatio ;
-
-  @override
-  Widget build(BuildContext context) {
-    return GridView.builder(
-      physics: NeverScrollableScrollPhysics(),
-      shrinkWrap: true,
-      itemCount: demoMywaste.length,
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: crossAxisCount,
-        crossAxisSpacing: defaultPadding,
-        mainAxisSpacing: defaultPadding,
-        childAspectRatio: childAspectRatio,
-      ),
-      itemBuilder: (context, index) =>
-          wasteInfoCard(info: demoMywaste[index],),
-    );
-
-
-  }
-
-
-
- }
-
-
-

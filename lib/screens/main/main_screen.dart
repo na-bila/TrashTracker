@@ -16,8 +16,10 @@ class MainScreen extends StatelessWidget {
       drawer: SideMenu(),
       body: SafeArea(
           child:Row(
+
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+
               // desktop
               if(Responsive.isDesktop(context))
               Expanded(
@@ -25,6 +27,7 @@ class MainScreen extends StatelessWidget {
               ),
 
               Expanded(
+
                   flex: 5,
                   child: DashboardScreen(),
 

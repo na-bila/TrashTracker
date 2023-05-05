@@ -27,6 +27,7 @@ class DashboardScreen extends StatelessWidget {
         child: Column(
 
           children: [
+
             header(),
             SizedBox(height: defaultPadding,),
             Row(

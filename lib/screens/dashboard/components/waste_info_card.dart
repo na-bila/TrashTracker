@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 //import 'package:flutter_svg/svg.dart';
 import 'package:untitled/constants.dart';
 import 'package:untitled/models/Mywaste.dart';
+import 'package:untitled/screens/dashboard/components/add_new.dart';
 
 class wasteInfoCard  extends StatelessWidget{
   const wasteInfoCard ({
@@ -15,45 +16,29 @@ class wasteInfoCard  extends StatelessWidget{
   @override
   Widget build(BuildContext context){
     return  Container(
-      padding: EdgeInsets.all(defaultPadding),
+      //padding: EdgeInsets.all(50),
+      //padding: EdgeInsets.symmetric(vertical: 10),
+      margin: EdgeInsets.symmetric(vertical: 5),
       decoration: BoxDecoration(
         color: secondaryColor,
         borderRadius: const BorderRadius.all(Radius.circular(10)),
 
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                padding: EdgeInsets.all(defaultPadding*0.75 ),
-               // height: 40,
-                //width: 40,
-
-                child: //SvgPicture.asset(info.svgSrc, color: info.color ,),
-                 SizedBox(
-                   height: 40,
-                   width: 40,
-                   child: Image.asset(info.svgSrc ,
-                   ),
-                 ),
-              ),
-              Icon(Icons.more_vert, color: Colors.white54,),
-
-
-            ],
+          SizedBox(
+            height: 80,
+            width: 80,
+            child: Image.asset(info.svgSrc ,
+            ),
           ),
-          Text(info.title, maxLines: 1, overflow:  TextOverflow.ellipsis,),
+          Text(info.title, maxLines: 1, overflow:  TextOverflow.ellipsis,style: TextStyle(fontSize: 20),),
+          SizedBox(height: 5,),
           ProgressLine(color : info.color , percentage: info.percentage,),
-          Row(
-
-            children: [
-              Text("${info.quantity} waste", style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Colors.white70), )
-            ],
-          )
+          SizedBox(height: 5,),
+          Text("${info.quantity} waste", style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.white70), )
         ],
       ),
     );

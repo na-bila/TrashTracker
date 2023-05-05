@@ -8,7 +8,7 @@ import 'package:untitled/screens/dashboard/components/edit_password.dart';
 import 'package:untitled/screens/dashboard/components/profile.dart';
 
 class  editprofile extends StatelessWidget{
-  Widget textfield({@required hintText}) {
+  Widget textfield({@required hintText,  }) {
     return Material(
       elevation: 4,
       shadowColor: Colors.grey,
@@ -66,20 +66,27 @@ class  editprofile extends StatelessWidget{
                         style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: bgColor, ),
                       ),
                       textfield(
+
                         hintText: 'Username',
+
                       ),
                       Text('Email:',
                         style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: bgColor, ),
                       ),
                       textfield(
+
                         hintText: 'Email',
+                        
+
                       ),
 
                       Text('address:',
                         style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: bgColor, ),
                       ),
                       textfield(
+
                         hintText: 'address',
+
                       ),
                       SizedBox(
                         height: 20,

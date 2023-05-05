@@ -45,9 +45,6 @@ DataRow recentWasteDataRow(Recentwaste wasteinfo ) {
   return DataRow(cells:[
     DataCell(Row(
       children: [
-        SvgPicture.asset(wasteinfo.icon,
-          height: 30,
-          width: 30,),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
           child: Text(wasteinfo.title),

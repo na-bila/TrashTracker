@@ -65,6 +65,7 @@ class  editpassword extends StatelessWidget{
                         style: TextStyle(fontSize: 20, fontWeight: FontWeight.w300, color: bgColor, ),
                       ),
                       textfield(
+
                         hintText: 'Password',
                       ),
                       Text('New password:',
