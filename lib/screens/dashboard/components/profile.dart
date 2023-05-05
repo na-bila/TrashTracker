@@ -89,12 +89,7 @@ class profile extends  StatelessWidget {
                   textfield(
                     hintText: 'Email',
                   ),
-                  Text('Password:',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w300, color: bgColor, ),
-                  ),
-                  textfield(
-                    hintText: 'Password',
-                  ),
+
                   Text('address:',
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: bgColor, ),
                   ),
@@ -108,19 +103,31 @@ class profile extends  StatelessWidget {
                     child: MaterialButton(
                       onPressed: () {
                         Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>  editprofile()));
-
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>  editprofile(),
+                          ),
+                        );
                       },
+
                       color: Colors.red,
-                      child: const Text(
-                        "edit infomation ",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 15,
-                        ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.edit,
+                            color: Colors.white,
+                          ),
+                          SizedBox(width: 5),
+                          Text(
+                            "Edit Information",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
