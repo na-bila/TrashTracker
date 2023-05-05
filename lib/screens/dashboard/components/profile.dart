@@ -4,8 +4,8 @@
 // ignore_for_file: camel_case_types, prefer_const_constructors, prefer_const_literals_to_create_immutables
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
+//import 'package:get/get.dart';
+//import 'package:image_picker/image_picker.dart';
 
 import 'package:untitled/screens/dashboard/components/edit_profile.dart';
 

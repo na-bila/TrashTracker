@@ -3,13 +3,13 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:get/get_navigation/get_navigation.dart';
+//import 'package:get/get_navigation/get_navigation.dart';
 import 'package:untitled/login_screen.dart';
 
 void main() {
   //WidgetsFlutterBinding.ensureInitialized();
   //await Firebase.initializeApp();
-  runApp( GetMaterialApp(
+  runApp( MaterialApp(
     initialRoute: '/loginScreen',
     debugShowCheckedModeBanner: false,
 
