@@ -1,6 +1,5 @@
-                                                                                  // ignore_for_file: prefer_const_constructors
-
-                                                                                  import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:untitled/constants.dart';
 import 'package:untitled/home_screen.dart';
 import 'package:untitled/auth_system/login_screen.dart';
@@ -16,8 +15,23 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmedPasswordController = TextEditingController ();
+  final displayNameController = TextEditingController();
+  final adressController = TextEditingController();
+  final phoneNumberController = TextEditingController();
+
+  @override
+  void dispose(){
+    emailController.dispose();
+    passwordController.dispose();
+    confirmedPasswordController.dispose();
+    displayNameController.dispose();
+    adressController.dispose();
+    phoneNumberController.dispose();
+    super.dispose();
+
+  }
   // sign up users
-  void signUserUp() async{
+  Future signUserUp() async{
     //show loading circle
     showDialog(
       context: context,
@@ -31,10 +45,20 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     try{
       // check if password is confirmed
       if (passwordController.text == confirmedPasswordController.text){
+        //authenticate user
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
             email: emailController.text.trim(),
             password: passwordController.text.trim(),
         );
+        //add user details
+        addUserDetails(
+          displayNameController.text.trim(),
+          adressController.text.trim(),
+          int.parse(phoneNumberController.text.toString()),
+          emailController.text.trim(),
+
+        );
+
       }else{
         // show error message password don't match
         showErrorMessage("Passwords don't match !");
@@ -47,6 +71,15 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     }
     // pop the loading circle
     Navigator.pop(context);
+  }
+  Future addUserDetails(String displayName,String city,int phone,String email) async {
+    var firebaseUser = FirebaseAuth.instance.currentUser;
+    await FirebaseFirestore.instance.collection('users').doc(firebaseUser?.uid).set({
+      'email': email,
+      'username': displayName,
+      'adress': city,
+      'phone': phone,
+    });
   }
 
   //error messsage to user
@@ -77,13 +110,63 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           child: Column(
             children: [
               SizedBox(
-                height: 180,
+                height: 100,
                 child: Image.asset(
                   "assets/images/zero-waste_logo_no-text-01.png",
                 ),
               ),
               const SizedBox(
-                height: 30,
+                height: 20,
+              ),
+
+              //username
+              TextFormField(
+                controller: displayNameController,
+                keyboardType: TextInputType.name,
+                decoration: InputDecoration(
+                  //suffixIcon: const Icon(Icons.nam),
+                  contentPadding:
+                  const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                  label: const Text("Username"),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              TextFormField(
+                controller: adressController,
+                keyboardType: TextInputType.name,
+                decoration: InputDecoration(
+                  suffixIcon: const Icon(Icons.location_city),
+                  contentPadding:
+                  const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                  label: const Text("Adress"),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              TextFormField(
+                controller: phoneNumberController,
+                keyboardType: TextInputType.phone,
+                decoration: InputDecoration(
+                  suffixIcon: const Icon(Icons.phone),
+                  contentPadding:
+                  const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                  label: const Text("Phone"),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 10,
               ),
               TextFormField(
                 controller: emailController,
@@ -99,22 +182,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 ),
               ),
               const SizedBox(
-                height: 30,
-              ),
-              TextFormField(
-                keyboardType: TextInputType.phone,
-                decoration: InputDecoration(
-                  suffixIcon: const Icon(Icons.phone),
-                  contentPadding:
-                  const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                  label: const Text("Phone"),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 30,
+                height: 10,
               ),
               TextFormField(
                 controller: passwordController,
@@ -130,7 +198,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 ),
               ),
               const SizedBox(
-                height: 30,
+                height: 10,
               ),
               TextFormField(
                 controller: confirmedPasswordController,

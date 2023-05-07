@@ -17,6 +17,7 @@ import '../../../constants.dart';
 
 class profile extends  StatelessWidget {
   final firebaseUser = FirebaseAuth.instance.currentUser;
+
   Widget textfield({@required hintText}) {
     return Material(
       elevation: 4,
@@ -101,7 +102,7 @@ class profile extends  StatelessWidget {
                   TextFormField(
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Colors.red, ),
                     enabled: false,
-                    initialValue: firebaseUser!.email!,
+                    initialValue: firebaseUser!.phoneNumber,
                   ),
                 ],
               ),

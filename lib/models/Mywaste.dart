@@ -25,7 +25,7 @@ import 'package:untitled/constants.dart';
      quantity: 000,
      svgSrc: 'assets/images/plastic1.jpg',
      color: primaryColor,
-     percentage: 20 ,
+     percentage: 30 ,
    ),
    CloudstorageInfo(
      title: "paper and carboard",
