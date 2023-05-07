@@ -8,7 +8,6 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:path/path.dart';
 
 import 'package:untitled/auth_system/registration_screen.dart';
-//import 'package:untitled/auth_system/services/ForgotPasswordPage.dart';
 import 'package:untitled/auth_system/services/auth_service_google.dart';
 import 'package:untitled/auth_system/services/forgotPasswordPage.dart';
 import 'package:untitled/auth_system/square_tile.dart';
