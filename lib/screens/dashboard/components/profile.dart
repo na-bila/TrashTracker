@@ -3,10 +3,11 @@
 
 // ignore_for_file: camel_case_types, prefer_const_constructors, prefer_const_literals_to_create_immutables
 import 'dart:io';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 //import 'package:get/get.dart';
 //import 'package:image_picker/image_picker.dart';
+
+import 'package:untitled/screens/dashboard/components/edit_profile.dart';
 
 
 
@@ -16,7 +17,6 @@ import '../../../constants.dart';
 
 
 class profile extends  StatelessWidget {
-  final firebaseUser = FirebaseAuth.instance.currentUser;
   Widget textfield({@required hintText}) {
     return Material(
       elevation: 4,
@@ -77,32 +77,63 @@ class profile extends  StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
 
-                  Text("username :",
+                  Text('username:',
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: bgColor, ),
                   ),
-              TextFormField(
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Colors.red, ),
-                enabled: false,
-                initialValue: firebaseUser!.displayName,
-              ),
-
-              Text('Email:',
+                  textfield(
+                    hintText: 'Username',
+                  ),
+                  Text('Email:',
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: bgColor, ),
                   ),
-                  TextFormField(
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Colors.red, ),
-                    enabled: false,
-                    initialValue: firebaseUser!.email,
+                  textfield(
+                    hintText: 'Email',
                   ),
 
-                  Text('Phone Number:',
+                  Text('address:',
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: bgColor, ),
                   ),
-                  TextFormField(
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Colors.red, ),
-                    enabled: false,
-                    initialValue: firebaseUser!.email!,
+                  textfield(
+                    hintText: 'address',
                   ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Center(
+                    child: MaterialButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>  editprofile(),
+                          ),
+                        );
+                      },
+
+                      color: Colors.red,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.edit,
+                            color: Colors.white,
+                          ),
+                          SizedBox(width: 5),
+                          Text(
+                            "Edit Information",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+
+
+
                 ],
               ),
             )
