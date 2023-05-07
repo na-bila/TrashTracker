@@ -55,6 +55,7 @@ dependencies:
   icon: ^2.2.1
   #Validate email
   email_validator: ^2.0.1
+  cloud_firestore: ^4.6.0
 
 
 dev_dependencies:

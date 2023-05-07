@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "543804983704",
+    "project_id": "trashtracker-b61e0",
+    "storage_bucket": "trashtracker-b61e0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:543804983704:android:5dc8617e445162293303ed",
+        "android_client_info": {
+          "package_name": "com.example.untitled"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "543804983704-vv6tt51q0boc6dnmbojso8maf1sh2rpu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6I2qzWLrIJqKkIDiluyTKHOzpAs7rmC0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "543804983704-vv6tt51q0boc6dnmbojso8maf1sh2rpu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
