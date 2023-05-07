@@ -1,9 +1,8 @@
                                                                                   // ignore_for_file: prefer_const_constructors
 
-                                                                                  import 'package:firebase_auth/firebase_auth.dart';
-import 'package:untitled/constants.dart';
+                                                                                  import 'package:untitled/constants.dart';
 import 'package:untitled/home_screen.dart';
-import 'package:untitled/auth_system/login_screen.dart';
+import 'package:untitled/login_screen.dart';
 import 'package:flutter/material.dart';
 class RegistrationScreen extends StatefulWidget {
   const RegistrationScreen({Key? key}) : super(key: key);
@@ -13,65 +12,15 @@ class RegistrationScreen extends StatefulWidget {
 }
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
-  final confirmedPasswordController = TextEditingController ();
-  // sign up users
-  void signUserUp() async{
-    //show loading circle
-    showDialog(
-      context: context,
-      builder: (context){
-        return const Center(
-          child: CircularProgressIndicator(),
-        );
-      }
-    );
-    // try creating the user
-    try{
-      // check if password is confirmed
-      if (passwordController.text == confirmedPasswordController.text){
-        await FirebaseAuth.instance.createUserWithEmailAndPassword(
-            email: emailController.text.trim(),
-            password: passwordController.text.trim(),
-        );
-      }else{
-        // show error message password don't match
-        showErrorMessage("Passwords don't match !");
-      }
-      // pop the loading circle
-      Navigator.pop(context);
-    } on FirebaseAuthException catch (e) {
-      //show error message
-      showErrorMessage(e.code);
-    }
-    // pop the loading circle
-    Navigator.pop(context);
-  }
-
-  //error messsage to user
-  void showErrorMessage(String message){
-    showDialog(
-      context: context,
-      builder:(context){
-        return AlertDialog(
-          backgroundColor: Colors.deepPurple,
-          title: Center(
-            child: Text(
-              message,
-              style: const TextStyle(color: Colors.white),
-            ),
-          ),
-        );
-      },
-    );
-  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: SingleChildScrollView(
-        child: Center(
+      appBar: AppBar(
+        backgroundColor: bgColor,
+        title: Text("Registration Screen"),
+      ),
+      body: Center(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Column(
@@ -86,13 +35,12 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 height: 30,
               ),
               TextFormField(
-                controller: emailController,
                 keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
                   suffixIcon: const Icon(Icons.email),
                   contentPadding:
                   const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                  label: const Text("Email"),
+                  label: const Text("Email or Phone"),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(5),
                   ),
@@ -117,7 +65,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 height: 30,
               ),
               TextFormField(
-                controller: passwordController,
                 keyboardType: TextInputType.visiblePassword,
                 decoration: InputDecoration(
                   suffixIcon: const Icon(Icons.password),
@@ -133,7 +80,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 height: 30,
               ),
               TextFormField(
-                controller: confirmedPasswordController,
                 keyboardType: TextInputType.visiblePassword,
                 decoration: InputDecoration(
                   suffixIcon: const Icon(Icons.password),
@@ -149,7 +95,13 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 height: 30,
               ),
               MaterialButton(
-                onPressed: signUserUp,
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => HomeScreen()));
+
+                },
                 color: Colors.red,
                 child: const Text(
                   "Sign Up",
@@ -160,13 +112,33 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   ),
                 ),
               ),
-
               const SizedBox(
                 height: 20,
               ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text("Already have an account ?!"),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => LoginScreen()));
+                    },
+                    child: const Text(
+                      "   Sign In",
+                      style: TextStyle(
+                        color: Colors.red,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
+                      ),
+                    ),
+                  ),
+                ],
+              )
             ],
           ),
-        ),
         ),
       ),
     );
