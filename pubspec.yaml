@@ -42,8 +42,20 @@ dependencies:
 
   google_fonts: ^4.0.3
   flutter_svg: ^0.22.0
+  flutter_spinkit: ^5.2.0
+  path_provider: ^2.0.12
+  path: ^1.8.2
+  http: ^0.13.5
+  google_sign_in: ^6.1.0
+  firebase_auth: ^4.5.0
+  intl: ^0.17.0
   fl_chart: ^0.35.0
   provider: ^5.0.0
+  firebase_core: ^2.11.0
+  icon: ^2.2.1
+  #Validate email
+  email_validator: ^2.0.1
+
 
 dev_dependencies:
   flutter_test:
@@ -70,8 +82,12 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/images/iStock-trash.jpg
+    - assets/images/google.png
     - assets/images/zero-waste_logo_no-text-01.png
+    - assets/images/plastic1.jpg
+    - assets/images/cardboard.jpg.6a687a6e.jpg
+    - assets/images/0_pFGH46zEA5ddgohb.jpg
+    - assets/images/Calgary-Organic-Recycling-Green-Bins.jpg
 
 
 
