@@ -92,7 +92,7 @@ class _profileState extends State<profile> {
                 ),
 
                 Container(
-                  height: 450,
+                  //height: 450,
                   width: double.infinity,
                   margin: EdgeInsets.symmetric(horizontal: 10),
                   child: Column(

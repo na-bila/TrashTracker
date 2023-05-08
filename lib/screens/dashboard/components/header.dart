@@ -16,12 +16,13 @@ class  header extends StatelessWidget {
   @override
   Widget build(BuildContext context){
     return  Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         if (!Responsive.isDesktop(context) )
         IconButton(icon : Icon(Icons.menu),
           onPressed: context.read<MenuAppController>().controlMenu,
         ),
-        if (!Responsive.isMobile(context))
+       // if (!Responsive.isMobile(context))
         Text (
           "Dashboard",
           style: Theme.of(context).textTheme.titleLarge,
@@ -50,6 +51,7 @@ class ProfileCard extends StatelessWidget{
           borderRadius: const BorderRadius.all(Radius.circular(10)),
           border: Border.all(color: Colors.white10)),
       child: Row(
+
         children: [
 
           if ( !Responsive.isMobile(context))

@@ -74,7 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
       context: this.context,
       builder: (context){
         return const AlertDialog(
-          title: Text('Incorrrect Email'),
+          title: Text('Incorrect Email'),
         );
     },
     );
@@ -86,7 +86,7 @@ class _LoginScreenState extends State<LoginScreen> {
       context: this.context,
       builder: (context){
         return const AlertDialog(
-          title: Text('Incorrrect Password'),
+          title: Text('Incorrect Password'),
         );
     },
     );
@@ -163,6 +163,7 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(
                 height: 20,
               ),
+
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal:8.0),
                 child: Row(
