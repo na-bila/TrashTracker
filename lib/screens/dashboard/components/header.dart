@@ -28,9 +28,9 @@ class  header extends StatelessWidget {
         ),
         if (!Responsive.isMobile(context))
         Spacer( flex:Responsive.isDesktop(context) ? 2:1,),
-        Expanded(
-          child: SearchField(),
-        ),
+        //Expanded(
+        //  child: SearchField(),
+        //),
         ProfileCard(),
 
       ],
@@ -72,39 +72,39 @@ class ProfileCard extends StatelessWidget{
     );
   }}
 
-class  SearchField extends StatelessWidget {
-  const SearchField({
-   Key?  key ,
-  }) : super ( key:key);
-  @override
-  Widget build(BuildContext context){
-    return TextField (
-      decoration: InputDecoration(
-        hintText:"search",
-        fillColor: secondaryColor,
-        filled: true,
-        border: OutlineInputBorder (
-          borderSide: BorderSide.none,
-          borderRadius:
-          const BorderRadius.all(Radius.circular(10)),
-
-        ),
-        suffixIcon: InkWell(
-          onTap: () {} ,
-          child: Container(
-            padding: EdgeInsets.all(defaultPadding*0.75),
-            margin: EdgeInsets.symmetric(horizontal: defaultPadding/2),
-            decoration: BoxDecoration(
-              color: primaryColor,
-              borderRadius:
-              const BorderRadius.all(Radius.circular(10)),
-            ),
-            child: Icon(Icons.search),
-            // SvgPicture.asset ("assets/icons/search-right-1507-svgrepo-com.svg"),
-          ),
-        ),
-
-      ),
-    );
-  }
-}
+//class  SearchField extends StatelessWidget {
+//  const SearchField({
+//   Key?  key ,
+//  }) : super ( key:key);
+//  @override
+//  Widget build(BuildContext context){
+//    return TextField (
+//      decoration: InputDecoration(
+//        hintText:"search",
+//        fillColor: secondaryColor,
+//        filled: true,
+//        border: OutlineInputBorder (
+//          borderSide: BorderSide.none,
+//          borderRadius:
+//          const BorderRadius.all(Radius.circular(10)),
+//
+//        ),
+//        suffixIcon: InkWell(
+//          onTap: () {} ,
+//          child: Container(
+//            padding: EdgeInsets.all(defaultPadding*0.75),
+//            margin: EdgeInsets.symmetric(horizontal: defaultPadding/2),
+//            decoration: BoxDecoration(
+//              color: primaryColor,
+//              borderRadius:
+//              const BorderRadius.all(Radius.circular(10)),
+//            ),
+//            child: Icon(Icons.search),
+//            // SvgPicture.asset ("assets/icons/search-right-1507-svgrepo-com.svg"),
+//          ),
+//        ),
+//
+//      ),
+//    );
+//  }
+//}

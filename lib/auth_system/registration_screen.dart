@@ -77,9 +77,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     var firebaseUser = FirebaseAuth.instance.currentUser;
     await FirebaseFirestore.instance.collection('users').doc(firebaseUser?.uid).set({
       'email': email,
-      'username': displayName,
+      'displayName': displayName,
       'adress': city,
-      'phone': phone,
+      'phoneNumber': phone,
     });
   }
 

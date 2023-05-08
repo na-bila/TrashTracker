@@ -1,22 +1,43 @@
 
-
-
-// ignore_for_file: camel_case_types, prefer_const_constructors, prefer_const_literals_to_create_immutables
 import 'dart:io';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-//import 'package:get/get.dart';
-//import 'package:image_picker/image_picker.dart';
 
 
 
 import '../../../constants.dart';
 
 
+class profile extends  StatefulWidget {
 
+  @override
+  State<profile> createState() => _profileState();
+}
 
-class profile extends  StatelessWidget {
-  final firebaseUser = FirebaseAuth.instance.currentUser;
+class _profileState extends State<profile> {
+  String displayName= "name loading..";
+
+  String email= "email loading..";
+
+  late int? phoneNumber;
+
+  Future getData() async{
+    User? user = await FirebaseAuth.instance.currentUser;
+    var vari = await FirebaseFirestore.instance.collection('users').doc(user?.uid).get();
+    setState((){
+      displayName = vari.data()?['displayName'];
+      email = vari.data()?['email'];
+      phoneNumber = vari.data()!['phoneNumber'];
+    });
+  }
+
+  @override
+  void initState(){
+    getData();
+    super.initState();
+  }
+
 
   Widget textfield({@required hintText}) {
     return Material(
@@ -41,6 +62,7 @@ class profile extends  StatelessWidget {
       ),
     );
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,70 +74,69 @@ class profile extends  StatelessWidget {
         backgroundColor: bgColor,
       ),
       body: Stack(
-        alignment: Alignment.center,
+            alignment: Alignment.center,
 
-        children: [
-        Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-
-            SizedBox(
-              height: 180,
-              child: Image.asset(
-                "assets/images/zero-waste_logo_no-text-01.png",
-              ),
-            ),
-
-            Container(
-              height: 450,
-              width: double.infinity,
-              margin: EdgeInsets.symmetric(horizontal: 10),
+            children: [
+            Padding(
+              padding: const EdgeInsets.all(20.0),
               child: Column(
-                //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
 
-                  Text("username :",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: bgColor, ),
-                  ),
-              TextFormField(
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Colors.red, ),
-                enabled: false,
-                initialValue: firebaseUser!.displayName,
-              ),
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
 
-              Text('Email:',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: bgColor, ),
+                SizedBox(
+                  height: 180,
+                  child: Image.asset(
+                    "assets/images/zero-waste_logo_no-text-01.png",
                   ),
+                ),
+
+                Container(
+                  height: 450,
+                  width: double.infinity,
+                  margin: EdgeInsets.symmetric(horizontal: 10),
+                  child: Column(
+                    //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+
+                      Text("username :",
+                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: bgColor, ),
+                      ),
                   TextFormField(
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Colors.red, ),
                     enabled: false,
-                    initialValue: firebaseUser!.email,
+                    initialValue: displayName,
                   ),
 
-                  Text('Phone Number:',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: bgColor, ),
+                  Text('Email:',
+                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: bgColor, ),
+                      ),
+                      TextFormField(
+                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Colors.red, ),
+                        enabled: false,
+                        initialValue: email,
+                      ),
+
+                      Text('Phone Number:',
+                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: bgColor, ),
+                      ),
+                      TextFormField(
+                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Colors.red, ),
+                        enabled: false,
+                        initialValue: phoneNumber.toString(),
+                      ),
+                    ],
                   ),
-                  TextFormField(
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Colors.red, ),
-                    enabled: false,
-                    initialValue: firebaseUser!.phoneNumber,
-                  ),
-                ],
-              ),
-            )
+                )
+              ],
+          ),
+            ),
           ],
-      ),
-        ),
-      ],
     ),
     );
   }
 }
-
 
 
 
