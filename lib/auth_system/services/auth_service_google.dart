@@ -1,3 +1,6 @@
+
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:untitled/auth_system/square_tile.dart';
@@ -13,8 +16,12 @@ class AuthService{
     );
     final firebaseUser = await FirebaseAuth.instance.signInWithCredential(
         authCredential);
-
-
+    addUserDetails(
+      firebaseUser.user?.displayName ?? '',
+      firebaseUser.user?.email ?? '',
+      firebaseUser.user?.phoneNumber,
+      firebaseUser.user?.uid ?? '',
+    );
     return await FirebaseAuth.instance.signInWithCredential(authCredential);
 
     //print(firebaseUser.user?.email);
@@ -22,7 +29,13 @@ class AuthService{
     //print(firebaseUser.user?.uid);
     //print(firebaseUser.user?.emailVerified);
     //print(firebaseUser.user?.photoURL);
-    //print(firebaseUser.user?.phoneNumber);
     //print(firebaseUser.user?.isAnonymous);
+  }
+  Future addUserDetails(String displayName,String email,String? phone,String uid) async {
+    await FirebaseFirestore.instance.collection('users').doc(uid).set({
+      'email': email,
+      'displayName': displayName,
+      'phoneNumber': int.tryParse(phone.toString()),
+    });
   }
 }
