@@ -27,7 +27,6 @@ import 'package:untitled/constants.dart';
      color: primaryColor,
      percentage: 30 ,
      information: 'Bottles are one of the most commonly recycled types of plastic. Plastic bottles are collected in recycling bins and taken to recycling centers where they are sorted by color, cleaned, and ground into small pieces. These pieces of plastic are then transformed into pellets that can be used to make new plastic products such as bottles, pipes, carpets, and clothing.'
-      ' However, recycling plastic bottles also presents challenges, such as the need to collect and sort plastic bottles properly in order to recycle them effectively. Furthermore, contamination of plastic bottles can make recycling more difficult and result in lower-quality end products. That is why it is important to follow the recycling guidelines of your region and properly sort your waste to facilitate the recycling of plastic bottles.'
    ),
    CloudstorageInfo(
      title: "paper and carboard",
@@ -35,7 +34,7 @@ import 'package:untitled/constants.dart';
      svgSrc: "assets/images/cardboard.jpg.6a687a6e.jpg",
      color: Colors.yellow,
      percentage: 10 ,
-     information: 'saber'
+     information: 'Recycling paper is an important practice in reducing the amount of waste in landfills and conserving natural resources. Paper recycling can be done by collecting used papers such as newspapers, magazines, and cardboard boxes and transforming them into new paper fibers. This helps to reduce tree logging and limit the environmental impact of paper production.'
    ),
    CloudstorageInfo(
      title: "batteries",

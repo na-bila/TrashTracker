@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled/auth_system/registration_screen.dart';
+import 'package:untitled/constants.dart';
 
 import '../firebase_options.dart';
 import 'login_screen.dart';
@@ -17,6 +18,7 @@ class TabbarScreen extends StatelessWidget {
         length: 2,
         child: Scaffold(
           appBar: AppBar(
+            backgroundColor: bgColor,
             actions: const [
               const Icon(Icons.settings)
             ],

@@ -20,6 +20,7 @@ class _AddNewScreenState extends State<AddNewScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       appBar: AppBar(
         title: Text(
           widget.info.title,
@@ -31,9 +32,11 @@ class _AddNewScreenState extends State<AddNewScreen> {
       ),
       body: SingleChildScrollView(
         child: Center(
+
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
+
               SizedBox(
                 height: 200,
                 width: 200,
@@ -42,6 +45,10 @@ class _AddNewScreenState extends State<AddNewScreen> {
               Text(
                 "choose the number of bags:",
                 style: TextStyle(fontSize: 20, color: Colors.white),
+
+              ),
+              SizedBox(
+                height: 20,
               ),
               QuantityInput(
                 value: simpleIntInput,
@@ -49,24 +56,59 @@ class _AddNewScreenState extends State<AddNewScreen> {
                       () => simpleIntInput = int.parse(value.replaceAll(',', '')),
                 ),
               ),
+              SizedBox(
+                height: 20,
+              ),
               Text(
-                'Value: $simpleIntInput',
+                'bag: $simpleIntInput',
                 style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
               ),
-
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text("some information:" ),
-
-                Text(
-                widget.info.information,
+            SizedBox(
+              height: 20,
+            ),
+            ElevatedButton(
+              onPressed: () {
+                // Fonction à exécuter lorsque le bouton est pressé
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.red,
+                padding: EdgeInsets.all(10),
+               
+              ),
+              child: Text(
+                'Save',
                 style: TextStyle(
                   color: Colors.white,
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
+            ),
+
+              SizedBox(
+                height: 20,
+              ),
+            Container(
+                padding: EdgeInsets.all(defaultPadding),
+
+                decoration: const BoxDecoration(color: secondaryColor,borderRadius: BorderRadius.all(Radius.circular(10),
+                ),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("some information:" ),
+
+                  Text(
+                  widget.info.information,
+                  style: TextStyle(
+                    color: Colors.white,
+
+                  ),
+                ),
             ],
           ),
+              ),
 
         ],
       ),
