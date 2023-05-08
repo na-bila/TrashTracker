@@ -16,21 +16,22 @@ class  header extends StatelessWidget {
   @override
   Widget build(BuildContext context){
     return  Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         if (!Responsive.isDesktop(context) )
         IconButton(icon : Icon(Icons.menu),
           onPressed: context.read<MenuAppController>().controlMenu,
         ),
-        if (!Responsive.isMobile(context))
+        //if (!Responsive.isMobile(context))
         Text (
           "Dashboard",
           style: Theme.of(context).textTheme.titleLarge,
         ),
         if (!Responsive.isMobile(context))
         Spacer( flex:Responsive.isDesktop(context) ? 2:1,),
-        Expanded(
+        /**Expanded(
           child: SearchField(),
-        ),
+        ),*/
         ProfileCard(),
 
       ],
@@ -44,6 +45,7 @@ class ProfileCard extends StatelessWidget{
   @override
   Widget build(BuildContext context){
     return Container(
+
       margin: EdgeInsets.only(left: defaultPadding),
       padding: EdgeInsets.symmetric(horizontal: defaultPadding/2),
       decoration: BoxDecoration(color: secondaryColor,
@@ -71,7 +73,7 @@ class ProfileCard extends StatelessWidget{
       ),
     );
   }}
-
+/**
 class  SearchField extends StatelessWidget {
   const SearchField({
    Key?  key ,
@@ -107,4 +109,4 @@ class  SearchField extends StatelessWidget {
       ),
     );
   }
-}
+}*/
