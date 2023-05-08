@@ -72,6 +72,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     // pop the loading circle
     Navigator.pop(context);
   }
+  //adduserdetails
   Future addUserDetails(String displayName,String city,int phone,String email) async {
     var firebaseUser = FirebaseAuth.instance.currentUser;
     await FirebaseFirestore.instance.collection('users').doc(firebaseUser?.uid).set({

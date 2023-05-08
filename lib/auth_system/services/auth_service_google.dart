@@ -13,6 +13,8 @@ class AuthService{
     );
     final firebaseUser = await FirebaseAuth.instance.signInWithCredential(
         authCredential);
+
+
     return await FirebaseAuth.instance.signInWithCredential(authCredential);
 
     //print(firebaseUser.user?.email);
