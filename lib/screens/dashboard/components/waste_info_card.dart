@@ -25,59 +25,22 @@ class wasteInfoCard  extends StatelessWidget{
 
       ),
       child: Column(
+        mainAxisSize: MainAxisSize.max,
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           SizedBox(
-            height: 80,
-            width: 80,
+            height: 100,
+            width: 100,
             child: Image.asset(info.svgSrc ,
             ),
           ),
           Text(info.title, maxLines: 1, overflow:  TextOverflow.ellipsis,style: TextStyle(fontSize: 20),),
-          SizedBox(height: 5,),
-          ProgressLine(color : info.color , percentage: info.percentage,),
-          SizedBox(height: 5,),
-          Text("${info.quantity} waste", style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.white70), )
+          SizedBox(height: 5,)
         ],
       ),
     );
   }
 
 }
-class ProgressLine  extends StatelessWidget{
-  const ProgressLine ({
-    Key ? key ,
-    this.color = primaryColor,
-    required this.percentage ,
 
-
-  }) : super  ( key : key);
-  final Color color;
-  final  int percentage ;
-  @override
-  Widget build (BuildContext context){
-    return Stack(
-      children: [
-        Container(
-          width: double.infinity,
-          height: 5,
-          decoration: BoxDecoration(
-            color: color.withOpacity(0.1),
-            borderRadius: BorderRadius.all(Radius.circular(10)),
-
-          ),
-        ),
-        LayoutBuilder(builder: (context,constaints) =>  Container(
-          width: constaints.maxWidth* (percentage/100),
-          height: 5,
-          decoration: BoxDecoration(
-            color: color,
-            borderRadius: BorderRadius.all(Radius.circular(10)),
-
-          ),
-        ),),
-      ],
-    );
-  }
-}

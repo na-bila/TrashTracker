@@ -22,13 +22,13 @@ class storagedetails extends StatelessWidget{
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("Storage Details",
+          Text("waste / carbon footprint",
             style: TextStyle(fontSize: 18,fontWeight: FontWeight.w500, ),
           ),
           SizedBox(height: defaultPadding,),
           Chart(),
           StorageInfoCard(
-            title: "plastic", svgSrc: 'assets/images/plastic1.jpg', quantity: 0,
+            title: "plastic", svgSrc: 'assets/images/plastic1.jpg', quantity: 2,
           ),
           StorageInfoCard(
             title: "paper", svgSrc: 'assets/images/cardboard.jpg.6a687a6e.jpg', quantity: 0,

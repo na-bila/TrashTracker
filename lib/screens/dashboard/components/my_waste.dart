@@ -21,7 +21,7 @@ class Mywaste extends StatelessWidget {
       children: [
 
             Text(
-              " My Waste",
+              " Add Waste",
 
               style: TextStyle(color: Colors.white , fontWeight: FontWeight.w300, fontSize: 20  ),
 

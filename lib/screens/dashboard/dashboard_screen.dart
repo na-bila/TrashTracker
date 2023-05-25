@@ -11,7 +11,7 @@ import 'package:untitled/constants.dart';
 import 'package:untitled/models/Recentwaste.dart';
 import 'package:untitled/responsive.dart';
 import 'package:untitled/screens/dashboard/components/header.dart';
-import 'package:untitled/screens/dashboard/components/my-waste.dart';
+import 'package:untitled/screens/dashboard/components/my_waste.dart';
 import 'package:untitled/screens/dashboard/components/recent_waste.dart';
 
 //import 'components/StorageInfoCard.dart';
