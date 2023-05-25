@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:untitled/constants.dart';
-import 'package:untitled/home_screen.dart';
-import 'package:untitled/auth_system/login_screen.dart';
 import 'package:flutter/material.dart';
 class RegistrationScreen extends StatefulWidget {
   const RegistrationScreen({Key? key}) : super(key: key);
@@ -18,6 +16,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   final displayNameController = TextEditingController();
   final adressController = TextEditingController();
   final phoneNumberController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
 
   @override
   void dispose(){
@@ -32,6 +31,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   }
   // sign up users
   Future signUserUp() async{
+    final isValid = formKey.currentState!.validate();
+    if(!isValid) return;
+
     //show loading circle
     showDialog(
       context: context,
@@ -133,6 +135,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     borderRadius: BorderRadius.circular(5),
                   ),
                 ),
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                validator: (value) =>
+                value != null
+                    ? 'Enter a username'
+                    : null,
               ),
               SizedBox(
                 height: 10,
@@ -149,6 +156,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     borderRadius: BorderRadius.circular(5),
                   ),
                 ),
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                validator: (value) =>
+                value != null
+                    ? 'Enter an adress'
+                    : null,
               ),
               SizedBox(
                 height: 10,
@@ -165,6 +177,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     borderRadius: BorderRadius.circular(5),
                   ),
                 ),
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                validator: (value) =>
+                value != null && value.length < 8
+                    ? 'Enter a valid phone number'
+                    : null,
               ),
               const SizedBox(
                 height: 10,
@@ -181,6 +198,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     borderRadius: BorderRadius.circular(5),
                   ),
                 ),
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                validator: (email) =>
+                email != null && !EmailValidator.validate(email)
+                    ? 'Enter a valid email'
+                    : null,
               ),
               const SizedBox(
                 height: 10,
@@ -197,6 +219,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     borderRadius: BorderRadius.circular(5),
                   ),
                 ),
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                validator: (value) =>
+                value != null && value.length < 6
+                    ? 'Enter min. 6 characters'
+                    : null,
               ),
               const SizedBox(
                 height: 10,
@@ -213,6 +240,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     borderRadius: BorderRadius.circular(5),
                   ),
                 ),
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                validator: (value) =>
+                value != null && value.length < 6
+                    ? 'Enter min. 6 characters'
+                    : null,
               ),
               const SizedBox(
                 height: 30,
