@@ -16,19 +16,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   final displayNameController = TextEditingController();
   final adressController = TextEditingController();
   final phoneNumberController = TextEditingController();
-  final formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  @override
-  void dispose(){
-    emailController.dispose();
-    passwordController.dispose();
-    confirmedPasswordController.dispose();
-    displayNameController.dispose();
-    adressController.dispose();
-    phoneNumberController.dispose();
-    super.dispose();
 
-  }
   // sign up users
   Future signUserUp() async{
     final isValid = formKey.currentState!.validate();
@@ -36,9 +26,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
     //show loading circle
     showDialog(
-      context: context,
+      context: this.context,
+        barrierDismissible: false,
       builder: (context){
-        return const Center(
+        return  Center(
           child: CircularProgressIndicator(),
         );
       }
@@ -77,12 +68,53 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   //adduserdetails
   Future addUserDetails(String displayName,String city,int phone,String email) async {
     var firebaseUser = FirebaseAuth.instance.currentUser;
-    await FirebaseFirestore.instance.collection('users').doc(firebaseUser?.uid).set({
+    await FirebaseFirestore.instance.collection('users')
+        .doc(firebaseUser?.uid)
+        .set({
       'email': email,
       'displayName': displayName,
       'adress': city,
       'phoneNumber': phone,
     });
+    await addMultiplecollection(
+        id: firebaseUser?.uid
+    );
+  }
+  Future addMultiplecollection({String? id}) async{
+    CollectionReference users= FirebaseFirestore.instance.collection('users');
+    users.doc(id).collection('trash').add(
+        {
+          'plastic': {
+            'currentQuantity': 0,
+            'records': {
+              'quantity':0,
+              'date': DateTime.now(),
+            },
+          },
+          'paper': {
+            'currentQuantity': 0,
+            'records': {
+              'quantity':0,
+              'date': DateTime.now(),
+            },
+          },
+          'batteries': {
+            'currentQuantity': 0,
+            'records': {
+              'quantity':0,
+              'date': DateTime.now(),
+            },
+          },
+          'organic': {
+            'currentQuantity': 0,
+            'records': {
+              'quantity':0,
+              'date': DateTime.now(),
+            },
+          },
+
+        },
+    );
   }
 
   //error messsage to user
@@ -104,168 +136,172 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   }
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: SingleChildScrollView(
         child: Center(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
-          child: Column(
-            children: [
-              SizedBox(
-                height: 100,
-                child: Image.asset(
-                  "assets/images/zero-waste_logo_no-text-01.png",
+          child: Form(
+            key: formKey,
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 100,
+                  child: Image.asset(
+                    "assets/images/zero-waste_logo_no-text-01.png",
+                  ),
                 ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
+                const SizedBox(
+                  height: 20,
+                ),
 
-              //username
-              TextFormField(
-                controller: displayNameController,
-                keyboardType: TextInputType.name,
-                decoration: InputDecoration(
-                  //suffixIcon: const Icon(Icons.nam),
-                  contentPadding:
-                  const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                  label: const Text("Username"),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(5),
+                //username
+                TextFormField(
+                  controller: displayNameController,
+                  keyboardType: TextInputType.name,
+                  decoration: InputDecoration(
+                    //suffixIcon: const Icon(Icons.nam),
+                    contentPadding:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                    label: const Text("Username"),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                  ),
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  validator: (value) =>
+                  value == null || value.isEmpty
+                      ? 'Enter a username'
+                      : null,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                TextFormField(
+                  controller: adressController,
+                  keyboardType: TextInputType.name,
+                  decoration: InputDecoration(
+                    suffixIcon: const Icon(Icons.location_city),
+                    contentPadding:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                    label: const Text("Adress"),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                  ),
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  validator: (adres) =>
+                  adres == null || adres.isEmpty
+                      ? 'Enter an adress'
+                      : null,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                TextFormField(
+                  controller: phoneNumberController,
+                  keyboardType: TextInputType.phone,
+                  decoration: InputDecoration(
+                    suffixIcon: const Icon(Icons.phone),
+                    contentPadding:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                    label: const Text("Phone"),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                  ),
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  validator: (value) =>
+                  value != null && value.length < 8
+                      ? 'Enter a valid phone number'
+                      : null,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                TextFormField(
+                  controller: emailController,
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: InputDecoration(
+                    suffixIcon: const Icon(Icons.email),
+                    contentPadding:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                    label: const Text("Email"),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                  ),
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  validator: (email) =>
+                  email != null && !EmailValidator.validate(email)
+                      ? 'Enter a valid email'
+                      : null,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                TextFormField(
+                  controller: passwordController,
+                  keyboardType: TextInputType.visiblePassword,
+                  decoration: InputDecoration(
+                    suffixIcon: const Icon(Icons.password),
+                    contentPadding:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                    label: const Text("Password"),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                  ),
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  validator: (value) =>
+                  value != null && value.length < 6
+                      ? 'Enter min. 6 characters'
+                      : null,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                TextFormField(
+                  controller: confirmedPasswordController,
+                  keyboardType: TextInputType.visiblePassword,
+                  decoration: InputDecoration(
+                    suffixIcon: const Icon(Icons.password),
+                    contentPadding:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                    label: const Text("Confirm Password"),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                  ),
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  validator: (value) =>
+                  value != null && value.length < 6
+                      ? 'Enter min. 6 characters'
+                      : null,
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                MaterialButton(
+                  onPressed: signUserUp,
+                  color: Colors.red,
+                  child: const Text(
+                    "Sign Up",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                    ),
                   ),
                 ),
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                validator: (value) =>
-                value != null
-                    ? 'Enter a username'
-                    : null,
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              TextFormField(
-                controller: adressController,
-                keyboardType: TextInputType.name,
-                decoration: InputDecoration(
-                  suffixIcon: const Icon(Icons.location_city),
-                  contentPadding:
-                  const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                  label: const Text("Adress"),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                ),
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                validator: (value) =>
-                value != null
-                    ? 'Enter an adress'
-                    : null,
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              TextFormField(
-                controller: phoneNumberController,
-                keyboardType: TextInputType.phone,
-                decoration: InputDecoration(
-                  suffixIcon: const Icon(Icons.phone),
-                  contentPadding:
-                  const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                  label: const Text("Phone"),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                ),
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                validator: (value) =>
-                value != null && value.length < 8
-                    ? 'Enter a valid phone number'
-                    : null,
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              TextFormField(
-                controller: emailController,
-                keyboardType: TextInputType.emailAddress,
-                decoration: InputDecoration(
-                  suffixIcon: const Icon(Icons.email),
-                  contentPadding:
-                  const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                  label: const Text("Email"),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                ),
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                validator: (email) =>
-                email != null && !EmailValidator.validate(email)
-                    ? 'Enter a valid email'
-                    : null,
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              TextFormField(
-                controller: passwordController,
-                keyboardType: TextInputType.visiblePassword,
-                decoration: InputDecoration(
-                  suffixIcon: const Icon(Icons.password),
-                  contentPadding:
-                  const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                  label: const Text("Password"),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                ),
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                validator: (value) =>
-                value != null && value.length < 6
-                    ? 'Enter min. 6 characters'
-                    : null,
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              TextFormField(
-                controller: confirmedPasswordController,
-                keyboardType: TextInputType.visiblePassword,
-                decoration: InputDecoration(
-                  suffixIcon: const Icon(Icons.password),
-                  contentPadding:
-                  const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                  label: const Text("Confirm Password"),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                ),
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                validator: (value) =>
-                value != null && value.length < 6
-                    ? 'Enter min. 6 characters'
-                    : null,
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              MaterialButton(
-                onPressed: signUserUp,
-                color: Colors.red,
-                child: const Text(
-                  "Sign Up",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 15,
-                  ),
-                ),
-              ),
 
-              const SizedBox(
-                height: 20,
-              ),
-            ],
+                const SizedBox(
+                  height: 20,
+                ),
+              ],
+            ),
           ),
         ),
         ),

@@ -1,31 +1,54 @@
 // ignore_for_file: file_names
 
 class Recentwaste{
-  final String title, date , quantity ;
+  String title;
+  String date;
+  int quantity ;
   Recentwaste({
 
     required this.date,
     required this.quantity ,
     required this.title,
 });
+
+  String get getTitle{
+    return title;
+  }
+  void setTitle(title){
+    this.title = title;
+  }
+
+
+  int get getQuantity{
+    return quantity;
+  }
+  void setQuantity(int quantity){
+    this.quantity = quantity;
+  }
+  String get getDate{
+    return date;
+  }
+  void setDate(String date){
+    this.date = date;
+  }
 }
 List demoRecentwaste =[
    Recentwaste(
 
      title: "plastic",
-     date: "16/04/2023",
-     quantity: "1 kg",
+     date: "",
+     quantity: 0,
    ),
   Recentwaste(
 
     title: "paper",
-    date: "16/04/2023",
-    quantity: " 0.5 kg",
+    date: "",
+    quantity: 0,
   ),
   Recentwaste(
 
     title: "organic ",
     date: "16/04/2023",
-    quantity: "1 kg",
+    quantity: 0,
   ),
 ];

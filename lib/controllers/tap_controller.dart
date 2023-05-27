@@ -15,6 +15,9 @@ class TapController extends GetxController {
     }
     update();
   }
+  int getQuantity(){
+    return _quantity;
+  }
 
   int checkQuantity(int quantity) {
     if (quantity < 0) {

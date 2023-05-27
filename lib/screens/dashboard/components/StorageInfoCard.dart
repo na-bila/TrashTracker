@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 import '../../../constants.dart';
 
-class StorageInfoCard extends StatelessWidget{
+class StorageInfoCard extends StatefulWidget{
   const StorageInfoCard ({
     Key? key ,
     required this.title,
@@ -19,7 +19,11 @@ class StorageInfoCard extends StatelessWidget{
   final String title, svgSrc ;
   final int quantity;
 
+  @override
+  State<StorageInfoCard> createState() => _StorageInfoCardState();
+}
 
+class _StorageInfoCardState extends State<StorageInfoCard> {
   @override
   Widget build(BuildContext context) {
 
@@ -37,7 +41,7 @@ class StorageInfoCard extends StatelessWidget{
         children: [
           SizedBox(height: 50, width: 50,
           child: //SvgPicture.asset(svgSrc),
-             Image.asset(svgSrc,
+             Image.asset(widget.svgSrc,
            ),
           ),
           const SizedBox(width: 40,),
@@ -47,10 +51,10 @@ class StorageInfoCard extends StatelessWidget{
 
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [ Text(title, maxLines: 1,
+                children: [ Text(widget.title, maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
-                  Text("$quantity waste",style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Colors.white70),)
+                  Text("${widget.quantity} waste",style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Colors.white70),)
 
                 ],
 

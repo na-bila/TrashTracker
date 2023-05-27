@@ -37,5 +37,44 @@ class AuthService{
       'displayName': displayName,
       'phoneNumber': int.tryParse(phone.toString()),
     });
+    await addMultiplecollection(
+        uid
+    );
+  }
+  Future addMultiplecollection(String uid) async{
+    CollectionReference users= FirebaseFirestore.instance.collection('users');
+    users.doc(uid).collection('trash').add(
+      {
+        'plastic': {
+          'currentQuantity': 0,
+          'records': {
+            'quantity':0,
+            'date': DateTime.now(),
+          },
+        },
+        'paper': {
+          'currentQuantity': 0,
+          'records': {
+            'quantity':0,
+            'date': DateTime.now(),
+          },
+        },
+        'batteries': {
+          'currentQuantity': 0,
+          'records': {
+            'quantity':0,
+            'date': DateTime.now(),
+          },
+        },
+        'organic': {
+          'currentQuantity': 0,
+          'records': {
+            'quantity':0,
+            'date': DateTime.now(),
+          },
+        },
+
+      },
+    );
   }
 }
