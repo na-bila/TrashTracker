@@ -25,7 +25,7 @@ class recentWaste extends StatefulWidget {
 class _recentWasteState extends State<recentWaste> {
   bool _isPageInitialized = false;
 
-  late Recentwaste wasteinfo=demoRecentwaste[0];
+  late Recentwaste wasteinfo = demoRecentwaste[0];
 
 
 
@@ -49,11 +49,9 @@ class _recentWasteState extends State<recentWaste> {
         if (data != null) {
           dynamic lastItem=data[wasteinfo.title]['records'][data[wasteinfo.title]['records'].length - 1];
           int lastQuantity = lastItem['quantity'];
-          String lastDate= lastItem['date'];
+          String lastDate= lastItem['date'].substring(0,10);
           wasteinfo.setDate(lastDate);
           wasteinfo.setQuantity(lastQuantity);
-          print("hiii");
-          print(lastDate);
 
         }
       });
