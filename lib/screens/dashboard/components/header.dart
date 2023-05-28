@@ -9,8 +9,8 @@ import 'package:untitled/screens/dashboard/components/profile.dart';
 //import 'package:flutter/src/material/menu_anchor.dart';
 
 
-class  header extends StatelessWidget {
-  const header({
+class  Header extends StatelessWidget {
+  const Header({
    Key? key ,
   }) : super ( key:key);
   @override

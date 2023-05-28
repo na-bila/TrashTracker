@@ -8,6 +8,8 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:untitled/auth_system/tabbar_screen.dart';
 import 'package:untitled/home_screen.dart';
 
+import '../../../localisation.dart';
+
 class SideMenu extends StatelessWidget {
   const SideMenu({
     Key? key,
@@ -57,7 +59,8 @@ class SideMenu extends StatelessWidget {
         ListTile(
           leading: const Icon(Icons.share_location),
           title: const Text('Tracking'),
-          onTap: (){},
+          onTap: () =>
+            Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const Localisation())),
         ),
         const Divider(color: Colors.black54),
         ListTile(
