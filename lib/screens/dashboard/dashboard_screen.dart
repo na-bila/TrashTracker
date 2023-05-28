@@ -18,7 +18,13 @@ import 'package:untitled/screens/dashboard/components/recent_waste.dart';
 //import 'components/chart.dart';
 import 'components/storagedetails.dart';
 
-class DashboardScreen extends StatelessWidget {
+class DashboardScreen extends StatefulWidget {
+  @override
+  State<DashboardScreen> createState() => _DashboardScreenState();
+}
+
+class _DashboardScreenState extends State<DashboardScreen> {
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(

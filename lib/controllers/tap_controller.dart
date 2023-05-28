@@ -25,11 +25,11 @@ class TapController extends GetxController {
         colorText: Colors.white,
       );
       return 0;
-    } else if (quantity > 20) {
+    } else if (quantity > 1000) {
       Get.snackbar("Item count", "You can't add more !",
         colorText: Colors.white,
       );
-      return 20;
+      return 1000;
     } else {
       return quantity;
     }

@@ -11,6 +11,8 @@ class Recentwaste{
     required this.title,
 });
 
+
+
   String get getTitle{
     return title;
   }
@@ -34,7 +36,6 @@ class Recentwaste{
 }
 List demoRecentwaste =[
    Recentwaste(
-
      title: "plastic",
      date: "",
      quantity: 0,
@@ -48,7 +49,7 @@ List demoRecentwaste =[
   Recentwaste(
 
     title: "organic ",
-    date: "16/04/2023",
+    date: "",
     quantity: 0,
   ),
 ];

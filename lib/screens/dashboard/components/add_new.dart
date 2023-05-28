@@ -22,13 +22,57 @@ class AddNewScreen extends StatefulWidget  {
 }
 
 class _AddNewScreenState extends State<AddNewScreen> {
+  bool _isPageInitialized = false;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (!_isPageInitialized) {
+      _refreshPage();
+      _isPageInitialized = true;
+    }
+  }
+
+  void _refreshPage() {
+    // Perform any necessary data reloading or updates
+    setInitialData();
+    // Call setState() to trigger a rebuild of the page
+    setState(() {
+      // Your refresh logic here
+    });
+
+  }
 
   late CloudstorageInfo info;
-  late int quantity=0;
+  late int quantity;
 
   _AddNewScreenState(CloudstorageInfo info) {
     this.info = info;
   }
+
+  Future setInitialData() async {
+      var firebaseUser = FirebaseAuth.instance.currentUser;
+      QuerySnapshot querySnapshot = await FirebaseFirestore.instance.collection(
+          'users').doc(firebaseUser?.uid)
+          .collection("trash").limit(1)
+          .get();
+      if (querySnapshot.docs.isNotEmpty) {
+        // retrieve the first document
+        DocumentSnapshot documentSnapshot = querySnapshot.docs.first;
+        String documentId = documentSnapshot.id;
+
+        DocumentSnapshot document = await FirebaseFirestore.instance
+            .collection('users')
+            .doc(firebaseUser?.uid)
+            .collection('trash')
+            .doc(documentId).get();
+        Map<String, dynamic>? data = document.data() as Map<String, dynamic>?;
+        if (data != null) {
+          int currentquantity = data[widget.info.title]['currentQuantity'];
+          widget.info.setQuantity(currentquantity);
+        }
+      }
+    }
 
   Future setData(int quantity) async {
     var firebaseUser = FirebaseAuth.instance.currentUser;
@@ -52,7 +96,7 @@ class _AddNewScreenState extends State<AddNewScreen> {
         widget.info.title+'.records': FieldValue.arrayUnion([
           {
             'quantity': quantity,
-            'date': DateTime.now()
+            'date': DateTime.now().toString(),
           }
         ]),
       });
@@ -74,7 +118,7 @@ class _AddNewScreenState extends State<AddNewScreen> {
 
     @override
     void initState() {
-      setData(quantity);
+      setInitialData();
       super.initState();
     }
 
