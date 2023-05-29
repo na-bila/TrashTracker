@@ -48,7 +48,7 @@ List demoRecentwaste =[
   ),
   Recentwaste(
 
-    title: "organic ",
+    title: "organic",
     date: "",
     quantity: 0,
   ),

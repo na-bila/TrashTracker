@@ -69,7 +69,9 @@ class _AddNewScreenState extends State<AddNewScreen> {
         Map<String, dynamic>? data = document.data() as Map<String, dynamic>?;
         if (data != null) {
           int currentquantity = data[widget.info.title]['currentQuantity'];
-          widget.info.setQuantity(currentquantity);
+          setState(() {
+            widget.info.setQuantity(currentquantity);
+          });
         }
       }
     }

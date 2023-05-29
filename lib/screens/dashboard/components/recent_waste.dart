@@ -2,6 +2,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:untitled/constants.dart';
@@ -23,13 +24,9 @@ class recentWaste extends StatefulWidget {
 
 
 class _recentWasteState extends State<recentWaste> {
-  bool _isPageInitialized = false;
-
-  late Recentwaste wasteinfo = demoRecentwaste[0];
-
-
 
   Future getData(Recentwaste wasteinfo) async {
+    await Firebase.initializeApp();
     var firebaseUser = FirebaseAuth.instance.currentUser;
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance.collection(
         'users').doc(firebaseUser?.uid)
@@ -39,7 +36,6 @@ class _recentWasteState extends State<recentWaste> {
       // retrieve the first document
       DocumentSnapshot documentSnapshot = querySnapshot.docs.first;
       String documentId = documentSnapshot.id;
-      setState(() async {
         DocumentSnapshot document = await FirebaseFirestore.instance
             .collection('users')
             .doc(firebaseUser?.uid)
@@ -51,16 +47,20 @@ class _recentWasteState extends State<recentWaste> {
           int lastQuantity = lastItem['quantity'];
           String lastDate= lastItem['date'].substring(0,10);
           wasteinfo.setDate(lastDate);
-          wasteinfo.setQuantity(lastQuantity);
+          setState(() {
+            wasteinfo.setQuantity(lastQuantity);
+          });
 
         }
-      });
     };
   }
 
   @override
   void initState() {
-    getData(wasteinfo);
+    WidgetsFlutterBinding.ensureInitialized();
+    for(int i=0;i<3;i++){
+      recentWasteDataRow(demoRecentwaste[i]);
+    }
     super.initState();
   }
 
@@ -85,7 +85,7 @@ class _recentWasteState extends State<recentWaste> {
                 horizontalMargin: 0,
                 columnSpacing: defaultPadding,
                 columns: [
-                  DataColumn(label: Text("type of waste "),),
+                  DataColumn(label: Text("type waste "),),
                   DataColumn(label: Text("Date"),),
                   DataColumn(label: Text("Quantity"),),
                 ],
@@ -100,6 +100,7 @@ class _recentWasteState extends State<recentWaste> {
 
 
   DataRow recentWasteDataRow(Recentwaste wasteinfo) {
+
     getData(wasteinfo);
     return DataRow(cells: [
       DataCell(Row(

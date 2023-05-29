@@ -10,8 +10,10 @@ class MenuAppController extends ChangeNotifier {
   GlobalKey<ScaffoldState> get scaffoldKey => _scaffoldKey;
 
   void controlMenu() {
-    if (!_scaffoldKey.currentState!.isDrawerOpen) {
-      _scaffoldKey.currentState!.openDrawer();
+    if (_scaffoldKey.currentState != null) {
+      if (!_scaffoldKey.currentState!.isDrawerOpen) {
+        _scaffoldKey.currentState!.openDrawer();
+      }
     }
   }
 }
