@@ -23,6 +23,7 @@ class Mywaste extends StatelessWidget {
             Text(
               " Add Waste",
 
+
               style: TextStyle(color: Colors.white , fontWeight: FontWeight.w300, fontSize: 20  ),
 
             ),

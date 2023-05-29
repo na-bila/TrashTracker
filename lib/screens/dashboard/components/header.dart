@@ -24,7 +24,7 @@ class  Header extends StatelessWidget {
         ),
        // if (!Responsive.isMobile(context))
         Text (
-          "Dashboard",
+          "Trash Tracker",
           style: Theme.of(context).textTheme.titleLarge,
         ),
         if (!Responsive.isMobile(context))

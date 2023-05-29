@@ -95,67 +95,60 @@ class _LocalisationState extends State<Localisation> {
       create: (_) => MenuAppController(),
       child: Column(
         children: [
-          Header(),
-          Expanded(
-            child: ListView(
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              children: [
-                SizedBox(
-                  width: MediaQuery.of(context).size.width,
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        height: 500,
-                        width: MediaQuery.of(context).size.width,
-                        child: Scaffold(
-                          body: GoogleMap(
-                            onTap: (tapped) async {
-                              List<Placemark> address = await placemarkFromCoordinates(tapped.latitude,tapped.longitude);
-                              //final coordinated = await geoCo.place(tapped.latitude,tapped.longitude);
-                              //var address = await geoCo.Geocoder.local.findAddressesFromCoordinates(
-                              //    coordinated
-                              //);
-                              var firstAddress=  address.first;
-                              getMarkers(tapped.latitude, tapped.longitude);
-                              await FirebaseFirestore.instance.collection('location').add({
-                                'latitude': tapped.latitude,
-                                'longitude': tapped.longitude,
-                                 'Address': firstAddress.name,
-                                'country': firstAddress.country,
-                                'PostalCode': firstAddress.postalCode
-                              });
-                              setState(() {
-                                country= firstAddress.country!;
-                                postalCode= firstAddress.postalCode!;
-                                addressLocation= firstAddress.name!;
-                              });
-                            },
-                            mapType: MapType.hybrid,
-                            compassEnabled: true,
-                            trafficEnabled: true,
-                            onMapCreated: (controller) {
-                              setState:
-                              (() {
-                                mapController = controller;
-                              });
-                            },
-                            initialCameraPosition: CameraPosition(
-                                target: LatLng(position?.latitude.toDouble() ?? 36.81897 , position?.longitude.toDouble() ?? 10.1657979),
-                                zoom: 15.0),
-                            markers: Set<Marker>.of(markers.values),
-                          ),
-                        ),
+          SizedBox(
+              height: 100,
+              child: Header()),
+          SizedBox(height: defaultPadding),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  SizedBox(
+                    height: 750,
+                    width: MediaQuery.of(context).size.width,
+                    child: Scaffold(
+                      body: GoogleMap(
+                        onTap: (tapped) async {
+                          List<Placemark> address = await placemarkFromCoordinates(tapped.latitude,tapped.longitude);
+                          //final coordinated = await geoCo.place(tapped.latitude,tapped.longitude);
+                          //var address = await geoCo.Geocoder.local.findAddressesFromCoordinates(
+                          //    coordinated
+                          //);
+                          var firstAddress=  address.first;
+                          getMarkers(tapped.latitude, tapped.longitude);
+                          await FirebaseFirestore.instance.collection('location').add({
+                            'latitude': tapped.latitude,
+                            'longitude': tapped.longitude,
+                             'Address': firstAddress.name,
+                            'country': firstAddress.country,
+                            'PostalCode': firstAddress.postalCode
+                          });
+                          setState(() {
+                            country= firstAddress.country!;
+                            postalCode= firstAddress.postalCode!;
+                            addressLocation= firstAddress.name!;
+                          });
+                        },
+                        mapType: MapType.hybrid,
+                        compassEnabled: true,
+                        trafficEnabled: true,
+                        onMapCreated: (controller) {
+                          setState:
+                          (() {
+                            mapController = controller;
+                          });
+                        },
+                        initialCameraPosition: CameraPosition(
+                            target: LatLng(position?.latitude.toDouble() ?? 36.81897 , position?.longitude.toDouble() ?? 10.1657979),
+                            zoom: 15.0),
+                        markers: Set<Marker>.of(markers.values),
                       ),
-                      Text('Address : $addressLocation'),
-                      Text('PostalCode : $postalCode'),
-                      Text('Country : $country'),
-
-                    ],
+                    ),
                   ),
-                ),
-              ],
-            ),
+                ],
+              ),
+            ],
           ),
         ],
       ),

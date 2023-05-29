@@ -1,16 +1,24 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, camel_case_types
 
 import 'package:flutter/material.dart';
+import 'package:untitled/models/Recentwaste.dart';
 import 'package:untitled/screens/dashboard/components/chart.dart';
 
 import '../../../constants.dart';
+import '../../../models/Mywaste.dart';
 import 'StorageInfoCard.dart';
 
 
-class storagedetails extends StatelessWidget{
+class storagedetails extends StatefulWidget{
   const storagedetails({
     Key ? key,
   }) :super(key: key);
+
+  @override
+  State<storagedetails> createState() => _storagedetailsState();
+}
+
+class _storagedetailsState extends State<storagedetails> {
   @override
   Widget build(BuildContext context){
     return Container(
@@ -26,18 +34,18 @@ class storagedetails extends StatelessWidget{
             style: TextStyle(fontSize: 18,fontWeight: FontWeight.w500, ),
           ),
           SizedBox(height: defaultPadding,),
-          Chart(),
+          Chart(info: demoMywaste),
           StorageInfoCard(
-            title: "plastic", svgSrc: 'assets/images/plastic1.jpg', quantity: 2,
+            unit: " bottles",info: demoMywaste[0],color:Color(0xFF26E5FF),
           ),
           StorageInfoCard(
-            title: "paper", svgSrc: 'assets/images/cardboard.jpg.6a687a6e.jpg', quantity: 0,
+            unit:" papers",info: demoMywaste[1],color:Color(0xFFFFCF26)
           ),
           StorageInfoCard(
-            title: "battery", svgSrc: 'assets/images/0_pFGH46zEA5ddgohb.jpg', quantity: 0,
+            unit:" batteries",info: demoMywaste[2],color: Color(0xFFEE2727),
           ),
           StorageInfoCard(
-            title: "organic", svgSrc: 'assets/images/Calgary-Organic-Recycling-Green-Bins.jpg', quantity: 0,
+            unit:" kg",info: demoMywaste[3], color: primaryColor,
           ),
         ],
       ),

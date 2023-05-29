@@ -9,7 +9,6 @@ class CloudstorageInfo {
   int quantity, percentage;
   final Color color;
 
-
   CloudstorageInfo(
       {required this.svgSrc,
       required this.description,
@@ -60,7 +59,7 @@ class CloudstorageInfo {
 
 List demoMywaste = [
   CloudstorageInfo(
-    description: " A 500 Millimiter Bottle / 3oz C02",
+    description: " A 500 Millimiter Bottle / 3 grams C02",
     title: "plastic",
     quantity: 000,
     svgSrc: 'assets/images/plastic1.jpg',
@@ -68,7 +67,7 @@ List demoMywaste = [
     percentage: 30,
   ),
   CloudstorageInfo(
-    description: "",
+    description: "1 tonne of Holmen’s paper / 1 500oz CO2",
     title: "paper",
     quantity: 000,
     svgSrc: "assets/images/cardboard.jpg.6a687a6e.jpg",
@@ -76,7 +75,7 @@ List demoMywaste = [
     percentage: 10,
   ),
   CloudstorageInfo(
-    description: "",
+    description: "1 battery / 150 to 200 kg CO2",
     title: "batteries",
     quantity: 000,
     svgSrc: "assets/images/0_pFGH46zEA5ddgohb.jpg",
@@ -84,7 +83,7 @@ List demoMywaste = [
     percentage: 10,
   ),
   CloudstorageInfo(
-    description: "",
+    description: "1 kg organic waste / 0.5 to 1kg CO2",
     title: "organic",
     quantity: 000,
     svgSrc: "assets/images/Calgary-Organic-Recycling-Green-Bins.jpg",
